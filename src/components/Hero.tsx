@@ -48,8 +48,7 @@ export function Hero() {
           </span>
           
           <h1 className="heading-xl text-gradient mb-8">
-            Abdullah <br /> 
-            <span className="text-accent">Usman</span>
+            Abdullah <span className="script-text">Usman</span>
           </h1>
 
           <p className="max-w-2xl mx-auto text-lg md:text-2xl text-white/40 mb-14 leading-relaxed font-medium">
