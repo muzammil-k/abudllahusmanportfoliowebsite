@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { 
   Film, 
   Scissors, 
@@ -43,34 +44,110 @@ const services = [
   },
 ];
 
-export function Services() {
+function TiltCard({ service, index }: { service: any; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateXValue = (y - centerY) / 10;
+    const rotateYValue = (centerX - x) / 10;
+    setRotateX(rotateXValue);
+    setRotateY(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
+
   return (
-    <section id="services" className="section-padding bg-[#0a0a0a]">
-      <div className="container-custom">
-        <div className="max-w-3xl mb-24">
-          <span className="text-xs uppercase tracking-[0.5em] text-accent font-bold">Capabilities</span>
-          <h2 className="text-5xl md:text-8xl font-black mt-8 tracking-tighter leading-none">
-            Creative <br />
-            <span className="text-white/20">Solutions.</span>
-          </h2>
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
+      animate={{ rotateX, rotateY }}
+      style={{ transformStyle: "preserve-3d" }}
+      className="group relative h-[400px] w-full"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div 
+        style={{ transform: "translateZ(50px)" }}
+        className="relative h-full w-full glass p-12 rounded-[2.5rem] flex flex-col justify-between border-white/5 group-hover:border-accent/40 transition-colors duration-500"
+      >
+        <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-2xl">
+          <service.icon size={32} />
+        </div>
+        
+        <div>
+          <h3 className="text-3xl font-black mb-6 group-hover:text-accent transition-colors">
+            {service.title}
+          </h3>
+          <p className="text-white/40 text-lg leading-relaxed">
+            {service.description}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="absolute top-8 right-8 text-white/5 font-black text-6xl group-hover:text-accent/10 transition-colors">
+          0{index + 1}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export function Services() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  return (
+    <section ref={containerRef} id="services" className="section-padding relative overflow-hidden">
+      {/* Background Text Parallax */}
+      <motion.div 
+        style={{ y }}
+        className="absolute top-20 right-0 text-[20rem] font-black text-white/[0.02] whitespace-nowrap pointer-events-none select-none uppercase"
+      >
+        Experience
+      </motion.div>
+
+      <div className="container-custom relative z-10">
+        <div className="text-center max-w-4xl mx-auto mb-32">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-xs uppercase tracking-[0.6em] text-accent font-bold"
+          >
+            Capabilities
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-6xl md:text-9xl font-black mt-8 tracking-tighter leading-[0.85]"
+          >
+            Creative <br />
+            <span className="text-white/20 italic">Solutions.</span>
+          </motion.h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass p-12 rounded-[2.5rem] group hover:border-accent/40 transition-all duration-500"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-accent/10 group-hover:scale-110 transition-all duration-500">
-                <service.icon className="text-white/60 group-hover:text-accent transition-colors" size={32} />
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 group-hover:text-accent transition-colors">{service.title}</h3>
-              <p className="text-white/40 text-lg leading-relaxed">{service.description}</p>
-            </motion.div>
+            <TiltCard key={service.title} service={service} index={index} />
           ))}
         </div>
       </div>
