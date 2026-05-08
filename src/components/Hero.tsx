@@ -1,64 +1,25 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import FloatingLines from "./FloatingLines";
-import { useEffect } from "react";
 
 export function Hero() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth movement springs
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  // Parallax transforms for different layers
-  const textX = useTransform(smoothX, [0, 500], [0, 20]);
-  const textY = useTransform(smoothY, [0, 500], [0, 20]);
-  
-  const cardX = useTransform(smoothX, [0, 500], [0, -40]);
-  const cardY = useTransform(smoothY, [0, 500], [0, -40]);
-
-  const bgX = useTransform(smoothX, [0, 500], [0, 10]);
-  const bgY = useTransform(smoothY, [0, 500], [0, 10]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      
-      // Normalize mouse position to range [-innerWidth/2, innerWidth/2]
-      const x = clientX - innerWidth / 2;
-      const y = clientY - innerHeight / 2;
-      
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
   return (
     <section className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden pt-20">
       {/* Background Lines Effect */}
-      <motion.div 
-        style={{ x: bgX, y: bgY }}
-        className="absolute inset-0 z-0 opacity-30"
-      >
+      <div className="absolute inset-0 z-0 opacity-30">
         <FloatingLines 
           linesGradient={['#ff4d4d', '#ff0000', '#333333']}
           animationSpeed={0.8}
-          parallaxStrength={0.2}
-          bendStrength={0.3}
+          interactive={true}
+          bendStrength={0.5}
+          bendRadius={4.0}
         />
-      </motion.div>
+      </div>
 
       {/* Background Orb */}
       <motion.div
-        style={{ x: bgX, y: bgY }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 0.2, scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
@@ -73,10 +34,7 @@ export function Hero() {
         />
       </motion.div>
 
-      <motion.div 
-        style={{ x: textX, y: textY }}
-        className="container relative z-10 text-center px-6"
-      >
+      <div className="container relative z-10 text-center px-6">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,11 +75,10 @@ export function Hero() {
             See Projects
           </button>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Floating Glass Cards */}
       <motion.div
-        style={{ x: cardX, y: cardY }}
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-20 left-[10%] hidden xl:block w-64 h-40 glass rounded-3xl p-6"
