@@ -8,9 +8,9 @@ export function Hero() {
   return (
     <section className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden pt-20">
       {/* Background Lines Effect */}
-      <div className="absolute inset-0 z-0 opacity-40">
+      <div className="absolute inset-0 z-0 opacity-30">
         <FloatingLines 
-          linesGradient={['#ffffff', '#a855f7', '#06b6d4']}
+          linesGradient={['#ff4d4d', '#ff0000', '#333333']}
           animationSpeed={0.8}
           parallaxStrength={0.1}
           bendStrength={0.2}
@@ -20,7 +20,7 @@ export function Hero() {
       {/* Background Orb */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.3, scale: 1 }}
+        animate={{ opacity: 0.2, scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none z-0"
       >
@@ -28,7 +28,7 @@ export function Hero() {
           src="/assets/hero_orb.png"
           alt="Orb"
           fill
-          className="object-contain blur-3xl"
+          className="object-contain blur-3xl opacity-20 invert"
           priority
         />
       </motion.div>
@@ -40,7 +40,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="inline-block text-xs uppercase tracking-[0.4em] text-accent mb-6"
         >
-          Creative Agency
+          Creative Video Editor
         </motion.span>
         
         <motion.h1
@@ -49,7 +49,7 @@ export function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
           className="heading-xl text-gradient mb-8"
         >
-          Branding that <br /> you needed
+          Abdullah <br /> Usman
         </motion.h1>
 
         <motion.p
@@ -58,7 +58,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.6 }}
           className="max-w-2xl mx-auto text-lg md:text-xl text-white/50 mb-12 leading-relaxed"
         >
-          We craft modern visual identities, digital experiences, and premium websites for bold brands.
+          Crafting cinematic stories and high-impact visual experiences through precision editing.
         </motion.p>
 
         <motion.div

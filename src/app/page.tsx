@@ -16,8 +16,8 @@ export default function Home() {
       <footer className="py-20 px-6 md:px-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
           <div>
-            <span className="text-2xl font-black tracking-tighter">AURA.</span>
-            <p className="text-white/30 text-sm mt-4">&copy; 2026 Aura Design. All rights reserved.</p>
+            <span className="text-2xl font-black tracking-tighter">ABDULLAH<span className="text-accent">.</span></span>
+            <p className="text-white/30 text-sm mt-4">&copy; 2026 Abdullah Usman. All rights reserved.</p>
           </div>
           
           <div className="flex gap-12">
