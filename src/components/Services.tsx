@@ -50,7 +50,8 @@ export function Services() {
         <div className="max-w-3xl mb-24">
           <span className="text-xs uppercase tracking-[0.5em] text-accent font-bold">Capabilities</span>
           <h2 className="text-5xl md:text-8xl font-black mt-8 tracking-tighter leading-none">
-            Creative <span className="script-text">Solutions</span>
+            Creative <br />
+            <span className="text-white/20">Solutions.</span>
           </h2>
         </div>
 

@@ -17,7 +17,8 @@ export function CTA() {
         >
           <span className="text-xs uppercase tracking-[0.5em] text-accent font-bold mb-10 block">Get in Touch</span>
           <h2 className="heading-xl text-gradient mb-16">
-            Ignite <span className="script-text text-white">Stories</span>
+            Let&apos;s ignite <br />
+            <span className="text-white/20">your story.</span>
           </h2>
 
           <div className="flex flex-col md:flex-row gap-8 justify-center items-center">

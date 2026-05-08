@@ -27,7 +27,8 @@ export function Projects() {
           <div className="max-w-2xl">
             <span className="text-xs uppercase tracking-[0.5em] text-accent font-bold">Showcase</span>
             <h2 className="text-5xl md:text-8xl font-black mt-8 tracking-tighter leading-none">
-              Featured <span className="script-text">Work</span>
+              Featured <br />
+              <span className="text-white/20">Work.</span>
             </h2>
           </div>
           <button className="flex items-center gap-4 text-accent font-black text-xl group">
