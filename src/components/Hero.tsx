@@ -2,22 +2,33 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import FloatingLines from "./FloatingLines";
 
 export function Hero() {
   return (
     <section className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden pt-20">
+      {/* Background Lines Effect */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <FloatingLines 
+          linesGradient={['#ffffff', '#a855f7', '#06b6d4']}
+          animationSpeed={0.8}
+          parallaxStrength={0.1}
+          bendStrength={0.2}
+        />
+      </div>
+
       {/* Background Orb */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.4, scale: 1 }}
+        animate={{ opacity: 0.3, scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none z-0"
       >
         <Image
           src="/assets/hero_orb.png"
           alt="Orb"
           fill
-          className="object-contain blur-2xl"
+          className="object-contain blur-3xl"
           priority
         />
       </motion.div>
