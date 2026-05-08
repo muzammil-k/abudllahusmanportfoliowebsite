@@ -9,6 +9,8 @@ export const metadata = {
   description: "Cinematic video editing and high-impact visual storytelling.",
 };
 
+import Ribbons from "@/components/Ribbons";
+
 export default function RootLayout({
   children,
 }: {
@@ -17,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans`}>
+        <Ribbons />
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

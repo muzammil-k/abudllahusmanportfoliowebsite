@@ -23,6 +23,7 @@
     -webkit-font-smoothing: antialiased;
     selection-background-color: var(--accent);
     selection-color: #ffffff;
+    cursor: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
