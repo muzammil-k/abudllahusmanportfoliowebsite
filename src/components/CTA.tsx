@@ -4,27 +4,32 @@ import { motion } from "framer-motion";
 
 export function CTA() {
   return (
-    <section id="contact" className="py-40 px-6 md:px-12 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,77,77,0.1)_0%,transparent_70%)] pointer-events-none" />
+    <section id="contact" className="section-padding relative overflow-hidden bg-[#0a0a0a]">
+      {/* Lava Glow Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.15)_0%,transparent_70%)] pointer-events-none" />
       
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+      <div className="container-custom relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-6xl md:text-9xl font-black mb-12 tracking-tighter"
+          transition={{ duration: 1 }}
         >
-          Let&apos;s edit your <br /><span className="text-white/30">next vision.</span>
-        </motion.h2>
+          <span className="text-xs uppercase tracking-[0.5em] text-accent font-bold mb-10 block">Get in Touch</span>
+          <h2 className="heading-xl text-gradient mb-16">
+            Let&apos;s ignite <br />
+            <span className="text-white/20">your story.</span>
+          </h2>
 
-        <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-          <button className="px-12 py-5 rounded-full bg-accent text-white font-black text-xl hover:scale-105 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,77,77,0.4)]">
-            Start a Project
-          </button>
-          <button className="px-12 py-5 rounded-full glass text-white font-black text-xl hover:bg-white/5 transition-all duration-300">
-            View Showreel
-          </button>
-        </div>
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+            <button className="btn-primary px-16 py-6 text-2xl">
+              Start a Project
+            </button>
+            <a href="mailto:hello@abdullah.design" className="text-2xl font-black border-b-2 border-white/10 hover:border-accent transition-colors py-2 px-4">
+              hello@abdullah.design
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
