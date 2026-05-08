@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   Film, 
   Scissors, 
@@ -78,23 +78,23 @@ function TiltCard({ service, index }: { service: any; index: number }) {
       transition={{ duration: 0.8, delay: index * 0.1 }}
       animate={{ rotateX, rotateY }}
       style={{ transformStyle: "preserve-3d" }}
-      className="group relative h-[400px] w-full"
+      className="group relative h-[450px] w-full"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       <div 
         style={{ transform: "translateZ(50px)" }}
-        className="relative h-full w-full glass p-12 rounded-[2.5rem] flex flex-col justify-between border-white/5 group-hover:border-accent/40 transition-colors duration-500"
+        className="relative h-full w-full glass p-12 rounded-[2.5rem] flex flex-col items-center text-center justify-center border-white/5 group-hover:border-accent/40 transition-colors duration-500"
       >
-        <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-2xl">
-          <service.icon size={32} />
+        <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-2xl">
+          <service.icon size={36} />
         </div>
         
         <div>
-          <h3 className="text-3xl font-black mb-6 group-hover:text-accent transition-colors">
+          <h3 className="text-3xl md:text-4xl font-black mb-6 group-hover:text-accent transition-colors tracking-tighter">
             {service.title}
           </h3>
-          <p className="text-white/40 text-lg leading-relaxed">
+          <p className="text-white/40 text-lg leading-relaxed max-w-[280px] mx-auto">
             {service.description}
           </p>
         </div>
@@ -114,38 +114,38 @@ export function Services() {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   return (
-    <section ref={containerRef} id="services" className="section-padding relative overflow-hidden">
+    <section ref={containerRef} id="services" className="section-padding relative overflow-hidden bg-[#0a0a0a]">
       {/* Background Text Parallax */}
       <motion.div 
         style={{ y }}
-        className="absolute top-20 right-0 text-[20rem] font-black text-white/[0.02] whitespace-nowrap pointer-events-none select-none uppercase"
+        className="absolute top-40 left-1/2 -translate-x-1/2 text-[25vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none select-none uppercase z-0"
       >
-        Experience
+        Capabilities
       </motion.div>
 
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-4xl mx-auto mb-32">
+        <div className="text-center max-w-5xl mx-auto mb-32">
           <motion.span 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-xs uppercase tracking-[0.6em] text-accent font-bold"
+            className="text-xs uppercase tracking-[0.8em] text-accent font-bold"
           >
             Capabilities
           </motion.span>
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-9xl font-black mt-8 tracking-tighter leading-[0.85]"
+            className="text-6xl md:text-9xl font-black mt-8 tracking-tighter leading-[0.8] uppercase"
           >
             Creative <br />
-            <span className="text-white/20 italic">Solutions.</span>
+            <span className="text-white/20">Solutions.</span>
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {services.map((service, index) => (
             <TiltCard key={service.title} service={service} index={index} />
           ))}
