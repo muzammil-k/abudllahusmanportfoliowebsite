@@ -1,81 +1,98 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import FloatingLines from "./FloatingLines";
+import LavaScene from "./LavaScene";
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden">
-      {/* Background Lines Effect - LAVA THEME */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <FloatingLines 
-          linesGradient={['#ff0000', '#ff4500', '#330000', '#121212']}
-          animationSpeed={1.2}
-          interactive={true}
-          bendStrength={0.8}
-          bendRadius={3.0}
-        />
-      </div>
-
-      {/* Background Lava Glow */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-accent/20 to-transparent pointer-events-none z-0" />
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background">
+      <LavaScene />
       
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.15 }}
-        transition={{ duration: 2 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] pointer-events-none z-0"
-      >
-        <Image
-          src="/assets/hero_orb.png"
-          alt="Lava Glow"
-          fill
-          className="object-contain blur-[120px] invert hue-rotate-[320deg]"
-          priority
-        />
-      </motion.div>
-
-      <div className="container-custom relative z-10 text-center px-6">
+      {/* Cinematic Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background z-[1]" />
+      
+      <div className="container-max relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-center"
         >
-          <span className="text-xs uppercase tracking-[0.5em] text-accent mb-8 font-bold">
-            Master Video Editor
-          </span>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="w-24 h-[2px] bg-accent mb-10 origin-left"
+          />
           
-          <h1 className="heading-xl text-gradient mb-8">
-            Abdullah <br /> 
-            <span className="text-accent">Usman</span>
+          <h1 className="hero-heading mb-8">
+            <span className="block text-white/40 overflow-hidden">
+              <motion.span
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="block"
+              >
+                Abdullah
+              </motion.span>
+            </span>
+            <span className="block text-accent text-glow overflow-hidden">
+              <motion.span
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="block"
+              >
+                Usman
+              </motion.span>
+            </span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-lg md:text-2xl text-white/40 mb-14 leading-relaxed font-medium">
-            Transforming raw footage into cinematic masterpieces with a focus on high-impact visual storytelling.
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="max-w-xl text-lg md:text-2xl text-white/30 mb-14 tracking-wide font-medium leading-relaxed"
+          >
+            Video Editor & Visual Storyteller. <br />
+            Crafting high-octane cinematic experiences for modern brands.
+          </motion.p>
 
-          <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <button className="btn-primary">
-              Book a Session
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="flex flex-col sm:flex-row gap-6"
+          >
+            <button className="btn-premium-fill flex items-center gap-3">
+              Start Project <ArrowRight size={20} />
             </button>
-            <button className="btn-secondary">
-              Latest Work
+            <button className="btn-premium-outline">
+              View Showreel
             </button>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Floating Decorative Elements */}
+      {/* Decorative Bottom Bar */}
       <motion.div
-        animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 right-[10%] hidden lg:block"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-10 left-12 hidden lg:flex items-center gap-8 z-10"
       >
-        <div className="w-24 h-24 glass rounded-2xl rotate-12 flex items-center justify-center">
-          <div className="w-12 h-12 rounded-full bg-accent/20 blur-lg" />
+        <div className="flex gap-4">
+          {['IG', 'TW', 'BE'].map((social) => (
+            <span key={social} className="text-[10px] font-bold tracking-widest text-white/20 hover:text-accent transition-colors cursor-pointer">
+              {social}
+            </span>
+          ))}
         </div>
+        <div className="h-px w-20 bg-white/10" />
+        <span className="text-[10px] font-bold tracking-widest text-white/20 uppercase">
+          Based in Pakistan / Remote
+        </span>
       </motion.div>
     </section>
   );

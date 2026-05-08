@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   Film, 
   Scissors, 
   Layers, 
   Wind, 
-  Tv, 
-  Zap 
+  Zap,
+  Activity
 } from "lucide-react";
 
 const services = [
@@ -16,138 +15,86 @@ const services = [
     title: "Cinematic Editing",
     description: "High-end storytelling for films, documentaries, and commercials.",
     icon: Film,
+    size: "col-span-2 row-span-1",
   },
   {
     title: "Post-Production",
-    description: "Precision cutting and assembly for seamless visual flow.",
+    description: "Precision cutting and visual flow.",
     icon: Scissors,
+    size: "col-span-1 row-span-1",
   },
   {
     title: "Color Grading",
-    description: "Professional color correction to set the perfect mood and tone.",
+    description: "Professional mood and tone setting.",
     icon: Layers,
+    size: "col-span-1 row-span-1",
   },
   {
     title: "Motion Graphics",
-    description: "Dynamic titles and 2D/3D elements that elevate your video.",
+    description: "Dynamic titles and 2D/3D elements.",
     icon: Zap,
+    size: "col-span-2 row-span-1",
   },
   {
     title: "Sound Design",
-    description: "Immersive audio soundscapes and crystal clear mixing.",
+    description: "Immersive audio soundscapes.",
     icon: Wind,
+    size: "col-span-1 row-span-1",
   },
   {
-    title: "Social Media Ads",
-    description: "Fast-paced, engaging edits designed for high conversion.",
-    icon: Tv,
+    title: "VFX & Effects",
+    description: "High-impact visual enhancements.",
+    icon: Activity,
+    size: "col-span-1 row-span-1",
   },
 ];
 
-function TiltCard({ service, index }: { service: any; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateXValue = (y - centerY) / 10;
-    const rotateYValue = (centerX - x) / 10;
-    setRotateX(rotateXValue);
-    setRotateY(rotateYValue);
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-  };
-
+export function Services() {
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      animate={{ rotateX, rotateY }}
-      style={{ transformStyle: "preserve-3d" }}
-      className="group relative h-[450px] w-full"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      <div 
-        style={{ transform: "translateZ(50px)" }}
-        className="relative h-full w-full glass p-12 rounded-[2.5rem] flex flex-col items-center text-center justify-center border-white/5 group-hover:border-accent/40 transition-colors duration-500"
-      >
-        <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-2xl">
-          <service.icon size={36} />
-        </div>
-        
-        <div>
-          <h3 className="text-3xl md:text-4xl font-black mb-6 group-hover:text-accent transition-colors tracking-tighter">
-            {service.title}
-          </h3>
-          <p className="text-white/40 text-lg leading-relaxed max-w-[280px] mx-auto">
-            {service.description}
+    <section id="services" className="section-spacing bg-background">
+      <div className="container-max">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+          <div className="max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="text-accent font-bold tracking-[0.4em] text-xs uppercase"
+            >
+              Expertise
+            </motion.span>
+            <h2 className="text-5xl md:text-8xl font-black mt-6 tracking-tighter leading-none">
+              Creative <br />
+              <span className="text-white/10">Edge.</span>
+            </h2>
+          </div>
+          <p className="max-w-md text-white/30 text-lg leading-relaxed">
+            Specializing in high-octane post-production that pushes the boundaries of visual storytelling.
           </p>
         </div>
 
-        <div className="absolute top-8 right-8 text-white/5 font-black text-6xl group-hover:text-accent/10 transition-colors">
-          0{index + 1}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-export function Services() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, -150]);
-
-  return (
-    <section ref={containerRef} id="services" className="section-padding relative overflow-hidden bg-[#0a0a0a]">
-      {/* Background Text Parallax */}
-      <motion.div 
-        style={{ y }}
-        className="absolute top-40 left-1/2 -translate-x-1/2 text-[25vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none select-none uppercase z-0"
-      >
-        Capabilities
-      </motion.div>
-
-      <div className="container-custom relative z-10">
-        <div className="text-center max-w-5xl mx-auto mb-32">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-xs uppercase tracking-[0.8em] text-accent font-bold"
-          >
-            Capabilities
-          </motion.span>
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-9xl font-black mt-8 tracking-tighter leading-[0.8] uppercase"
-          >
-            Creative <br />
-            <span className="text-white/20">Solutions.</span>
-          </motion.h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
           {services.map((service, index) => (
-            <TiltCard key={service.title} service={service} index={index} />
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className={`glass-card p-10 flex flex-col justify-between group hover:border-accent/30 transition-all duration-500 cursor-default ${service.size}`}
+            >
+              <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                <service.icon size={28} />
+              </div>
+              
+              <div>
+                <h3 className="text-2xl md:text-3xl font-black mb-4 group-hover:text-accent transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-white/30 text-base leading-relaxed group-hover:text-white/50 transition-colors">
+                  {service.description}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

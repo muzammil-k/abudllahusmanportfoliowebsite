@@ -3,68 +3,72 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import { Play, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
-    title: "Urban Pulse",
-    category: "Short Film / Music Video",
+    title: "The Neon Frontier",
+    category: "Futuristic Short Film",
     image: "/assets/project_1.png",
-    description: "A fast-paced rhythmic edit exploring the energy of Tokyo's nightlife.",
+    color: "#ff0000",
   },
   {
-    title: "The Silent Peak",
-    category: "Documentary / Nature",
+    title: "Apex Athletics",
+    category: "Brand Commercial",
     image: "/assets/project_2.png",
-    description: "Cinematic color grading and storytelling for an alpine expedition.",
+    color: "#990000",
+  },
+  {
+    title: "Shadow Syndicate",
+    category: "Music Video",
+    image: "/assets/hero_orb.png",
+    color: "#ff4d4d",
   },
 ];
 
-function ProjectItem({ project, index }: { project: any; index: number }) {
+function ProjectCard({ project, index }: { project: any; index: number }) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-  const textY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   return (
-    <div ref={containerRef} className={`flex flex-col lg:flex-row gap-20 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}>
+    <div ref={containerRef} className="h-screen w-full flex items-center justify-center sticky top-0 overflow-hidden">
       <motion.div 
-        style={{ y: imageY }}
-        className="flex-[1.5] relative aspect-[16/10] w-full overflow-hidden rounded-[3rem] shadow-2xl group cursor-pointer"
+        style={{ scale, opacity }}
+        className="relative w-full h-[80vh] container-max overflow-hidden rounded-[3rem] group"
       >
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
+          className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
         />
-        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 flex items-center justify-center transition-all duration-700">
-          <div className="w-24 h-24 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-500 shadow-2xl">
-            <Play size={40} className="fill-white text-white ml-2" />
+        
+        {/* Project Info Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-12 md:p-24 flex flex-col justify-end">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+            <div className="max-w-2xl">
+              <span className="text-accent font-bold tracking-[0.4em] text-xs uppercase mb-6 block">
+                {project.category}
+              </span>
+              <h3 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-8">
+                {project.title}
+              </h3>
+              <button className="btn-premium-outline w-fit flex items-center gap-3">
+                View Case Study <ArrowUpRight size={20} />
+              </button>
+            </div>
+            
+            <div className="text-[12rem] font-black text-white/5 leading-none hidden lg:block">
+              0{index + 1}
+            </div>
           </div>
         </div>
-      </motion.div>
-      
-      <motion.div 
-        style={{ y: textY }}
-        className="flex-1 flex flex-col"
-      >
-        <div className="flex items-center gap-4 mb-6">
-          <div className="h-[2px] w-12 bg-accent" />
-          <span className="text-sm font-black text-accent uppercase tracking-[0.3em]">{project.category}</span>
-        </div>
-        <h3 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-none">{project.title}</h3>
-        <p className="text-xl md:text-2xl text-white/40 mb-12 leading-relaxed">
-          {project.description}
-        </p>
-        <button className="btn-secondary w-fit flex items-center gap-4 px-12 group border-white/5">
-          Case Study
-          <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-        </button>
       </motion.div>
     </div>
   );
@@ -72,21 +76,18 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
 
 export function Projects() {
   return (
-    <section id="projects" className="section-padding bg-[#121212] relative overflow-hidden">
-      <div className="container-custom">
-        <div className="flex flex-col items-center text-center mb-32">
-          <span className="text-xs uppercase tracking-[0.6em] text-accent font-bold">Showcase</span>
-          <h2 className="text-6xl md:text-9xl font-black mt-8 tracking-tighter leading-[0.85]">
-            Featured <br />
-            <span className="text-white/20 italic">Work.</span>
-          </h2>
-        </div>
-
-        <div className="flex flex-col gap-60">
-          {projects.map((project, index) => (
-            <ProjectItem key={project.title} project={project} index={index} />
-          ))}
-        </div>
+    <section id="projects" className="bg-background relative">
+      <div className="container-max pt-32 pb-12">
+        <span className="text-accent font-bold tracking-[0.4em] text-xs uppercase">Selected</span>
+        <h2 className="text-5xl md:text-8xl font-black mt-6 tracking-tighter leading-none">
+          Works.
+        </h2>
+      </div>
+      
+      <div className="relative">
+        {projects.map((project, index) => (
+          <ProjectCard key={project.title} project={project} index={index} />
+        ))}
       </div>
     </section>
   );

@@ -1,81 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --background: #121212; /* Charcoal Black */
+  --background: #050505;
   --foreground: #ffffff;
-  --accent: #ff4d4d; /* Premium Red */
-  --text-muted: #888888;
+  --accent: #ff0000;
+  --accent-glow: rgba(255, 0, 0, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
-  --color-muted: var(--text-muted);
-  --font-sans: var(--font-inter), sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Outfit", system-ui, sans-serif;
 }
 
 @layer base {
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    @apply bg-background text-foreground antialiased selection:bg-accent selection:text-white;
     font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    selection-background-color: var(--accent);
-    selection-color: #ffffff;
-    cursor: none;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-black tracking-tighter uppercase;
+    @apply font-display font-black tracking-tight uppercase;
   }
 }
 
 @layer components {
-  .section-padding {
-    @apply py-24 md:py-40 px-6 md:px-12 lg:px-24;
+  .container-max {
+    @apply max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20;
   }
 
-  .container-custom {
-    @apply max-w-7xl mx-auto w-full;
+  .section-spacing {
+    @apply py-32 md:py-48;
   }
 
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .glass-card {
+    @apply bg-[var(--glass-bg)] backdrop-blur-2xl border border-[var(--glass-border)] rounded-[2.5rem];
   }
 
-  .heading-xl {
-    @apply text-6xl md:text-8xl lg:text-[10rem] leading-[0.9] font-black uppercase;
+  .text-glow {
+    text-shadow: 0 0 20px var(--accent-glow);
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20;
+  .hero-heading {
+    @apply text-[clamp(3.5rem,15vw,12rem)] leading-[0.85] font-black tracking-tighter uppercase;
   }
 
-  .btn-primary {
-    @apply px-10 py-5 rounded-full bg-accent text-white font-black text-lg transition-all duration-300 hover:scale-105;
-    box-shadow: 0 0 40px rgba(255, 77, 77, 0.3);
+  .btn-premium {
+    @apply relative px-10 py-5 rounded-full font-bold transition-all duration-500 overflow-hidden;
   }
 
-  .btn-secondary {
-    @apply px-10 py-5 rounded-full text-white font-black text-lg transition-all duration-300 hover:scale-105;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .btn-premium-fill {
+    @apply btn-premium bg-accent text-white hover:scale-105 hover:shadow-[0_0_40px_rgba(255,0,0,0.5)];
   }
-}
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  .btn-premium-outline {
+    @apply btn-premium border border-white/10 text-white hover:bg-white/5;
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -88,26 +78,10 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: var(--accent);
 }
 
-/* Smooth Scroll behavior for Lenis */
-html.lenis {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
+/* Transitions */
+.page-transition {
+  @apply transition-all duration-700 ease-in-out;
 }
