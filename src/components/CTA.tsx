@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Mail, MessageCircle, Share2 } from "lucide-react";
 
 export function CTA() {
   return (
@@ -33,7 +33,7 @@ export function CTA() {
             </button>
             
             <div className="flex gap-8">
-              {[Mail, Github, Linkedin].map((Icon, i) => (
+              {[Mail, MessageCircle, Share2].map((Icon, i) => (
                 <div key={i} className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300 cursor-pointer">
                   <Icon size={24} />
                 </div>
