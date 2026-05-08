@@ -1,13 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import LavaScene from "./LavaScene";
+import LightPillar from "./LightPillar";
 import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background">
-      <LavaScene />
+      <LightPillar 
+        topColor="#ff0000" 
+        bottomColor="#050505" 
+        intensity={1.2}
+        pillarWidth={4.0}
+        pillarHeight={0.3}
+        glowAmount={0.008}
+      />
       
       {/* Cinematic Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background z-[1]" />
