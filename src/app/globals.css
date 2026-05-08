@@ -7,6 +7,14 @@
   --text-muted: #888888;
 }
 
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--text-muted);
+  --font-sans: "Inter", sans-serif;
+}
+
 @layer base {
   body {
     @apply bg-background text-foreground antialiased selection:bg-accent selection:text-white;
@@ -39,10 +47,6 @@
     @apply bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20;
   }
 
-  .lava-gradient {
-    @apply bg-gradient-to-br from-[#ff4d4d] via-[#990000] to-[#121212];
-  }
-
   .btn-primary {
     @apply px-10 py-5 rounded-full bg-accent text-white font-black text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,77,77,0.4)];
   }
@@ -52,41 +56,10 @@
   }
 }
 
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-muted: var(--text-muted);
-  --font-sans: "Inter", sans-serif;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-}
-
-/* Glassmorphism Utility */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Typography Helpers */
-.text-gradient {
-  background: linear-gradient(to right, #fff, #a1a1aa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.heading-xl {
-  font-size: clamp(3.5rem, 12vw, 9rem);
-  line-height: 0.85;
-  font-weight: 900;
-  letter-spacing: -0.05em;
 }
 
 /* Custom Scrollbar */
