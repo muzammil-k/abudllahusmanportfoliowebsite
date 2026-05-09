@@ -1,19 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import LightPillar from "./LightPillar";
+import FloatingLines from "./FloatingLines";
 import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background">
-      <LightPillar 
-        topColor="#ff0000" 
-        bottomColor="#050505" 
-        intensity={1.2}
-        pillarWidth={4.0}
-        pillarHeight={0.3}
-        glowAmount={0.008}
+      <FloatingLines 
+        linesGradient={['#ff0000', '#ff4d4d', '#cc0000', '#990000', '#050505']}
+        animationSpeed={0.5}
+        interactive={true}
+        parallax={true}
       />
       
       {/* Cinematic Overlay */}

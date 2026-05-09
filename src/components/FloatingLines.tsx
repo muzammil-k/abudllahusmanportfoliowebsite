@@ -505,7 +505,7 @@ export default function FloatingLines({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full overflow-hidden floating-lines-container"
+      className="absolute inset-0 w-full h-full overflow-hidden floating-lines-container z-0"
       style={{
         mixBlendMode: mixBlendMode
       }}
