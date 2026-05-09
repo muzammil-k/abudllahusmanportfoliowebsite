@@ -9,6 +9,7 @@ import {
   Zap,
   Activity
 } from "lucide-react";
+import GlareHover from "./GlareHover";
 
 const services = [
   {
@@ -80,20 +81,28 @@ export function Services() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className={`glass-card p-10 flex flex-col justify-between group hover:border-accent/30 transition-all duration-500 cursor-default ${service.size}`}
+              className={`${service.size}`}
             >
-              <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                <service.icon size={28} />
-              </div>
-              
-              <div>
-                <h3 className="text-2xl md:text-3xl font-black mb-4 group-hover:text-accent transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-white/30 text-base leading-relaxed group-hover:text-white/50 transition-colors">
-                  {service.description}
-                </p>
-              </div>
+              <GlareHover
+                borderRadius="2.5rem"
+                borderColor="rgba(255, 255, 255, 0.1)"
+                glareColor="#ff0000"
+                glareOpacity={0.2}
+                className="glass-card p-10 flex flex-col justify-between group hover:border-accent/30 transition-all duration-500 cursor-default h-full w-full"
+              >
+                <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                  <service.icon size={28} />
+                </div>
+                
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-black mb-4 group-hover:text-accent transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/30 text-base leading-relaxed group-hover:text-white/50 transition-colors">
+                    {service.description}
+                  </p>
+                </div>
+              </GlareHover>
             </motion.div>
           ))}
         </div>
