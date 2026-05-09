@@ -72,8 +72,8 @@ export function Hero() {
 
       {/* Bottom Content: Name */}
       <div className="relative z-10 w-full flex justify-center pb-4 md:pb-12 mt-12 md:mt-0">
-        <h1 className="hero-heading text-center flex flex-col items-center">
-          <span className="block overflow-hidden pb-2">
+        <h1 className="hero-heading text-center flex flex-row items-center gap-4 md:gap-8">
+          <span className="block overflow-hidden">
             <motion.span
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -83,7 +83,7 @@ export function Hero() {
               Abdullah
             </motion.span>
           </span>
-          <span className="block overflow-hidden -mt-4 md:-mt-8">
+          <span className="block overflow-hidden">
             <motion.span
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
