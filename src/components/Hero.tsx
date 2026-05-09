@@ -78,7 +78,7 @@ export function Hero() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/30"
+              className="block text-shimmer"
             >
               Abdullah
             </motion.span>

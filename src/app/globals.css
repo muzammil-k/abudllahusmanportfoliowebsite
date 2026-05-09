@@ -54,7 +54,28 @@
   }
 
   .hero-heading {
-    @apply text-[clamp(3.5rem,15vw,12rem)] leading-[0.85] font-black tracking-tighter uppercase;
+    @apply text-[clamp(2.45rem,10.5vw,8.4rem)] leading-[0.85] font-black tracking-tighter uppercase;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      to right,
+      #ffffff 20%,
+      var(--accent) 40%,
+      var(--accent) 60%,
+      #ffffff 80%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
   }
 
   .btn-premium-fill {
