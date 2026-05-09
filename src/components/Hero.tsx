@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import FloatingLines from "./FloatingLines";
+import Lanyard from "./Lanyard";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
@@ -14,6 +15,7 @@ export function Hero() {
         interactive={true}
         parallax={true}
       />
+      <Lanyard />
       
       {/* Cinematic Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background z-[1]" />
