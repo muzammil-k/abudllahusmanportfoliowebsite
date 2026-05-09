@@ -21,8 +21,8 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 
 declare module '@react-three/fiber' {
   interface ThreeElements {
-    meshLineGeometry: ThreeElement<typeof MeshLineGeometry>;
-    meshLineMaterial: ThreeElement<typeof MeshLineMaterial>;
+    meshLineGeometry: any;
+    meshLineMaterial: any;
   }
 }
 
