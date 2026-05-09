@@ -10,6 +10,7 @@ export const metadata = {
 };
 
 import Ribbons from "@/components/Ribbons";
+import CustomCursor from "@/components/CustomCursor";
 
 export default function RootLayout({
   children,
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans`}>
+        <CustomCursor />
         <Ribbons />
         <SmoothScrollProvider>
           {children}
